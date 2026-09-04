@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MM Photo Frames | Custom Photo Frames</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f6f8;
+  color:#171717;
+  padding-bottom:75px;
+}
+
+header{
+  background:#111827;
+  color:white;
+  padding:18px 16px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.header-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:bold;
+}
+
+.header-icon{
+  font-size:24px;
+}
+
+.search-bar{
+  margin-top:14px;
+  background:white;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  padding:10px 13px;
+}
+
+.search-bar span{
+  font-size:21px;
+  margin-right:9px;
+}
+
+.search-bar input{
+  border:0;
+  outline:0;
+  width:100%;
+  font-size:15px;
+}
+
+.page{
+  display:none;
+  max-width:900px;
+  margin:auto;
+  padding:16px;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  background:linear-gradient(135deg,#111827,#374151);
+  color:white;
+  border-radius:18px;
+  padding:25px 20px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:29px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#e5e7eb;
+  line-height:1.5;
+}
+
+.hero button{
+  margin-top:18px;
+  padding:13px 20px;
+  border:0;
+  border-radius:10px;
+  background:white;
+  color:#111827;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.section-title{
+  font-size:21px;
+  margin:20px 0 12px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  padding:16px;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.product-icon{
+  height:100px;
+  border-radius:12px;
+  background:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  margin-bottom:12px;
+}
+
+.product h3{
+  font-size:16px;
+  margin-bottom:5px;
+}
+
+.product p{
+  color:#666;
+  font-size:13px;
+}
+
+.product-price{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:9px;
+}
+
+.product button{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:0;
+  border-radius:9px;
+  background:#111827;
+  color:white;
+  font-weight:bold;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:19px;
+  margin-bottom:16px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.card h2{
+  margin-bottom:16px;
+  font-size:20px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:13px 0 7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#111827;
+}
+
+.size-grid,
+.quality-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.choice{
+  border:2px solid #ddd;
+  border-radius:12px;
+  padding:15px 10px;
+  text-align:center;
+  cursor:pointer;
+  background:white;
+}
+
+.choice.active{
+  border-color:#111827;
+  background:#f3f4f6;
+}
+
+.choice strong{
+  display:block;
+  font-size:16px;
+}
+
+.choice small{
+  display:block;
+  color:#666;
+  margin-top:5px;
+}
+
+.quality-grid .choice{
+  text-align:left;
+}
+
+.quality-grid .choice strong{
+  margin-bottom:5px;
+}
+
+.upload{
+  border:2px dashed #aaa;
+  border-radius:13px;
+  padding:22px;
+  text-align:center;
+  background:#fafafa;
+}
+
+.preview{
+  display:none;
+  text-align:center;
+  margin-top:15px;
+}
+
+.preview img{
+  max-width:250px;
+  max-height:250px;
+  border-radius:12px;
+  border:5px solid #222;
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.quantity button{
+  width:43px;
+  height:43px;
+  border:0;
+  border-radius:9px;
+  background:#111827;
+  color:white;
+  font-size:23px;
+}
+
+.quantity input{
+  width:70px;
+  text-align:center;
+}
+
+.summary{
+  background:#111827;
+  color:white;
+  border-radius:16px;
+  padding:20px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+}
+
+.total{
+  border-top:1px solid #555;
+  margin-top:8px;
+  padding-top:15px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.order-button{
+  width:100%;
+  margin-top:18px;
+  padding:16px;
+  border:0;
+  border-radius:11px;
+  background:#25D366;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.confirmation{
+  display:none;
+  background:#ecfdf5;
+  border:2px solid #22c55e;
+  color:#166534;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:16px;
+}
+
+.confirmation h2{
+  margin-bottom:10px;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:100;
+}
+
+.nav-item{
+  border:0;
+  background:none;
+  color:#666;
+  font-size:12px;
+  text-align:center;
+}
+
+.nav-item div{
+  font-size:23px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#111827;
+  font-weight:bold;
+}
+
+.search-results{
+  margin-top:15px;
+}
+
+.no-results{
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
+
+.account-box{
+  text-align:center;
+  padding:25px;
+}
+
+.account-icon{
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+.info{
+  background:#fff7ed;
+  border-left:4px solid #f97316;
+  padding:12px;
+  margin-top:13px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#777;
+}
+
+@media(max-width:500px){
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+}
+
+@media(max-width:360px){
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .size-grid,
+  .quality-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="logo">🖼️ MM Photo Frames</div>
+    <div class="header-icon">🛍️</div>
+  </div>
+
+  <div class="search-bar">
+    <span>🔍</span>
+    <input
+      type="text"
+      id="topSearch"
+      placeholder="Search photo frames..."
+      oninput="searchFrames(this.value)"
+    >
+  </div>
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="homePage" class="page active">
+
+  <div class="hero">
+    <h1>Custom Photo Frames</h1>
+    <p>
+      Turn your favourite photos into beautiful frames.
+      Choose your size and print quality.
+    </p>
+
+    <button onclick="openOrder()">
+      🛒 Order Now
+    </button>
+  </div>
+
+  <h2 class="section-title">🔥 Popular Frames</h2>
+
+  <div class="products">
+
+    <div class="product">
+      <div class="product-icon">🖼️</div>
+      <h3>4 × 6 inch</h3>
+      <p>Starting price</p>
+      <div class="product-price">₹149</div>
+      <button onclick="selectSizeAndOrder('4x6')">
+        Order
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-icon">🖼️</div>
+      <h3>6 × 8 inch</h3>
+      <p>Starting price</p>
+      <div class="product-price">₹199</div>
+      <button onclick="selectSizeAndOrder('6x8')">
+        Order
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-icon">🖼️</div>
+      <h3>8 × 10 inch</h3>
+      <p>Starting price</p>
+      <div class="product-price">₹299</div>
+      <button onclick="selectSizeAndOrder('8x10')">
+        Order
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-icon">🖼️</div>
+      <h3>10 × 12 inch</h3>
+      <p>Starting price</p>
+      <div class="product-price">₹399</div>
+      <button onclick="selectSizeAndOrder('10x12')">
+        Order
+      </button>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">✨ Why Choose Us?</h2>
+
+  <div class="card">
+    <p>📸 High-quality photo printing</p>
+    <br>
+    <p>🖼️ Multiple frame sizes</p>
+    <br>
+    <p>🚚 Home delivery available</p>
+    <br>
+    <p>💵 Cash on Delivery available</p>
+    <br>
+    <p>📱 Easy WhatsApp ordering</p>
+  </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<section id="searchPage" class="page">
+
+  <div class="card">
+
+    <h2>🔍 Search Frames</h2>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search 4x6, 8x10, 12x18..."
+      oninput="searchFrames(this.value)"
+    >
+
+  </div>
+
+  <div id="searchResults" class="search-results"></div>
+
+</section>
+
+
+<!-- ================= ORDER ================= -->
+
+<section id="orderPage" class="page">
+
+  <div id="confirmation" class="confirmation">
+    <h2>✅ Order Created!</h2>
+    <p id="confirmationText"></p>
+  </div>
+
+
+  <!-- CUSTOMER -->
+
+  <div class="card">
+
+    <h2>👤 Customer Details</h2>
+
+    <label>Full Name *</label>
+
+    <input
+      type="text"
+      id="customerName"
+      placeholder="Enter your full name"
+    >
+
+    <label>Mobile Number *</label>
+
+    <input
+      type="tel"
+      id="customerMobile"
+      maxlength="10"
+      placeholder="10-digit mobile number"
+    >
+
+    <label>Delivery Address *</label>
+
+    <textarea
+      id="customerAddress"
+      placeholder="House No, Street, Village/City, District, PIN"
+    ></textarea>
+
+  </div>
+
+
+  <!-- PHOTO -->
+
+  <div class="card">
+
+    <h2>📸 Upload Your Photo</h2>
+
+    <div class="upload">
+
+      <p>Select the photo you want to print</p>
+
+      <input
+        type="file"
+        id="photo"
+        accept="image/*"
+      >
+
+    </div>
+
+    <div class="preview" id="preview">
+
+      <p><b>Photo Preview</b></p>
+
+      <br>
+
+      <img id="previewImage" src="" alt="Photo Preview">
+
+    </div>
+
+    <div class="info">
+      📌 Choose a clear, high-quality photo for the best printing result.
+    </div>
+
+  </div>
+
+
+  <!-- SIZE -->
+
+  <div class="card">
+
+    <h2>📏 Select Frame Size</h2>
+
+    <div class="size-grid">
+
+      <div
+        class="choice size-choice active"
+        data-size="4x6"
+        onclick="chooseSize(this)"
+      >
+        <strong>4 × 6</strong>
+        <small>From ₹149</small>
+      </div>
+
+      <div
+        class="choice size-choice"
+        data-size="6x8"
+        onclick="chooseSize(this)"
+      >
+        <strong>6 × 8</strong>
+        <small>From ₹199</small>
+      </div>
+
+      <div
+        class="choice size-choice"
+        data-size="8x10"
+        onclick="chooseSize(this)"
+      >
+        <strong>8 × 10</strong>
+        <small>From ₹299</small>
+      </div>
+
+      <div
+        class="choice size-choice"
+        data-size="10x12"
+        onclick="chooseSize(this)"
+      >
+        <strong>10 × 12</strong>
+        <small>From ₹399</small>
+      </div>
+
+      <div
+        class="choice size-choice"
+        data-size="12x18"
+        onclick="chooseSize(this)"
+      >
+        <strong>12 × 18</strong>
+        <small>From ₹499</small>
+      </div>
+
+      <div
+        class="choice size-choice"
+        data-size="16x20"
+        onclick="chooseSize(this)"
+      >
+        <strong>16 × 20</strong>
+        <small>From ₹699</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PRINT QUALITY -->
+
+  <div class="card">
+
+    <h2>🖨️ Select Print Quality</h2>
+
+    <div class="quality-grid">
+
+      <div
+        class="choice quality-choice active"
+        data-quality="Standard Print"
+        onclick="chooseQuality(this)"
+      >
+        <strong>Standard</strong>
+        <small>Good quality</small>
+      </div>
+
+      <div
+        class="choice quality-choice"
+        data-quality="HD Print"
+        onclick="chooseQuality(this)"
+      >
+        <strong>HD</strong>
+        <small>Sharper details</small>
+      </div>
+
+      <div
+        class="choice quality-choice"
+        data-quality="Premium Photo Print"
+        onclick="chooseQuality(this)"
+      >
+        <strong>Premium</strong>
+        <small>Best photo quality</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- QUANTITY -->
+
+  <div class="card">
+
+    <h2>🔢 Quantity</h2>
+
+    <div class="quantity">
+
+      <button onclick="changeQuantity(-1)">
+        −
+      </button>
+
+      <input
+        type="number"
+        id="quantity"
+        value="1"
+        readonly
+      >
+
+      <button onclick="changeQuantity(1)">
+        +
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- DELIVERY -->
+
+  <div class="card">
+
+    <h2>🚚 Delivery</h2>
+
+    <select id="delivery" onchange="updateSummary()">
+
+      <option value="49">
+        Standard Delivery — ₹49
+      </option>
+
+      <option value="99">
+        Fast Delivery — ₹99
+      </option>
+
+      <option value="0">
+        Local Pickup — Free
+      </option>
+
+    </select>
+
+    <div class="info">
+      Standard delivery: approximately 3 days.
+    </div>
+
+  </div>
+
+
+  <!-- PAYMENT -->
+
+  <div class="card">
+
+    <h2>💳 Payment Method</h2>
+
+    <label>
+      <input
+        type="radio"
+        name="payment"
+        value="Cash on Delivery"
+        checked
+        style="width:auto"
+      >
+      💵 Cash on Delivery
+    </label>
+
+    <label>
+      <input
+        type="radio"
+        name="payment"
+        value="PhonePe"
+        style="width:auto"
+      >
+      📱 PhonePe
+    </label>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary">
+
+    <h2>🧾 Order Summary</h2>
+
+    <div class="summary-row">
+      <span>Size</span>
+      <span id="summarySize">4 × 6</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Print Quality</span>
+      <span id="summaryQuality">Standard</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Price / Frame</span>
+      <span id="summaryPrice">₹149</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Quantity</span>
+      <span id="summaryQuantity">1</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Delivery</span>
+      <span id="summaryDelivery">₹49</span>
+    </div>
+
+    <div class="summary-row total">
+      <span>Total</span>
+      <span id="total">₹198</span>
+    </div>
+
+    <button
+      class="order-button"
+      onclick="placeOrder()"
+    >
+      📲 PLACE ORDER ON WHATSAPP
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ACCOUNT ================= -->
+
+<section id="accountPage" class="page">
+
+  <div class="card account-box">
+
+    <div class="account-icon">
+      👤
+    </div>
+
+    <h2>My Account</h2>
+
+    <p style="color:#666;margin-top:8px;">
+      MM Photo Frames Customer
+    </p>
+
+    <div class="info">
+      Your customer information is entered during checkout.
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>📦 How Ordering Works</h2>
+
+    <p>1️⃣ Select frame size</p>
+    <br>
+    <p>2️⃣ Select print quality</p>
+    <br>
+    <p>3️⃣ Upload your photo</p>
+    <br>
+    <p>4️⃣ Enter your address</p>
+    <br>
+    <p>5️⃣ Select payment method</p>
+    <br>
+    <p>6️⃣ Place your order</p>
+
+  </div>
+
+</section>
+
+
+<footer>
+  © 2026 MM Photo Frames • All Rights Reserved
+</footer>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+  <button
+    class="nav-item active"
+    onclick="showPage('homePage',this)"
+  >
+    <div>🏠</div>
+    Home
+  </button>
+
+  <button
+    class="nav-item"
+    onclick="showPage('searchPage',this)"
+  >
+    <div>🔍</div>
+    Search
+  </button>
+
+  <button
+    class="nav-item"
+    onclick="openOrder()"
+  >
+    <div>🛒</div>
+    Order
+  </button>
+
+  <button
+    class="nav-item"
+    onclick="showPage('accountPage',this)"
+  >
+    <div>👤</div>
+    Account
+  </button>
+
+</nav>
+
+
+<script>
+
+/* =========================================
+   WHATSAPP NUMBER
+========================================= */
+
+const whatsappNumber = "919989665930";
+
+
+/* =========================================
+   PRICING
+   SIZE + QUALITY
+========================================= */
+
+const prices = {
+
+  "4x6": {
+    "Standard Print":149,
+    "HD Print":179,
+    "Premium Photo Print":199
+  },
+
+  "6x8": {
+    "Standard Print":199,
+    "HD Print":229,
+    "Premium Photo Print":259
+  },
+
+  "8x10": {
+    "Standard Print":299,
+    "HD Print":349,
+    "Premium Photo Print":399
+  },
+
+  "10x12": {
+    "Standard Print":399,
+    "HD Print":449,
+    "Premium Photo Print":499
+  },
+
+  "12x18": {
+    "Standard Print":499,
+    "HD Print":599,
+    "Premium Photo Print":699
+  },
+
+  "16x20": {
+    "Standard Print":699,
+    "HD Print":799,
+    "Premium Photo Print":899
+  }
+
+};
+
+
+/* =========================================
+   CURRENT SELECTION
+========================================= */
+
+let selectedSize = "4x6";
+
+let selectedQuality = "Standard Print";
+
+let quantity = 1;
+
+
+/* =========================================
+   PAGE NAVIGATION
+========================================= */
+
+function showPage(pageId, button){
+
+  document.querySelectorAll(".page")
+    .forEach(page => {
+      page.classList.remove("active");
+    });
+
+  document.getElementById(pageId)
+    .classList.add("active");
+
+  document.querySelectorAll(".nav-item")
+    .forEach(item => {
+      item.classList.remove("active");
+    });
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* =========================================
+   OPEN ORDER
+========================================= */
+
+function openOrder(){
+
+  showPage(
+    "orderPage",
+    document.querySelectorAll(".nav-item")[2]
+  );
+
+}
+
+
+/* =========================================
+   SELECT SIZE FROM HOME
+========================================= */
+
+function selectSizeAndOrder(size){
+
+  selectedSize = size;
+
+  openOrder();
+
+  document.querySelectorAll(".size-choice")
+    .forEach(choice => {
+
+      choice.classList.remove("active");
+
+      if(choice.dataset.size === size){
+        choice.classList.add("active");
+      }
+
+    });
+
+  updateSummary();
+
+}
+
+
+/* =========================================
+   SIZE SELECTION
+========================================= */
+
+function chooseSize(element){
+
+  document.querySelectorAll(".size-choice")
+    .forEach(item => {
+      item.classList.remove("active");
+    });
+
+  element.classList.add("active");
+
+  selectedSize = element.dataset.size;
+
+  updateSummary();
+
+}
+
+
+/* =========================================
+   QUALITY SELECTION
+========================================= */
+
+function chooseQuality(element){
+
+  document.querySelectorAll(".quality-choice")
+    .forEach(item => {
+      item.classList.remove("active");
+    });
+
+  element.classList.add("active");
+
+  selectedQuality = element.dataset.quality;
+
+  updateSummary();
+
+}
+
+
+/* =========================================
+   QUANTITY
+========================================= */
+
+function changeQuantity(change){
+
+  quantity += change;
+
+  if(quantity < 1){
+    quantity = 1;
+  }
+
+  if(quantity > 20){
+    quantity = 20;
+  }
+
+  document.getElementById("quantity")
+    .value = quantity;
+
+  updateSummary();
+
+}
+
+
+/* =========================================
+   PHOTO PREVIEW
+========================================= */
+
+document.getElementById("photo")
+  .addEventListener("change",function(){
+
+    const file = this.files[0];
+
+    if(!file){
+      return;
+    }
+
+    if(!file.type.startsWith("image/")){
+
+      alert("Please select an image.");
+
+      this.value = "";
+
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+      document.getElementById("previewImage")
+        .src = event.target.result;
+
+      document.getElementById("preview")
+        .style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+
+/* =========================================
+   UPDATE SUMMARY
+========================================= */
+
+function updateSummary(){
+
+  const price =
+    prices[selectedSize][selectedQuality];
+
+  const delivery =
+    Number(
+      document.getElementById("delivery").value
+    );
+
+  const frameTotal =
+    price * quantity;
+
+  const total =
+    frameTotal + delivery;
+
+
+  document.getElementById("summarySize")
+    .textContent =
+      formatSize(selectedSize);
+
+  document.getElementById("summaryQuality")
+    .textContent =
+      shortQuality(selectedQuality);
+
+  document.getElementById("summaryPrice")
+    .textContent =
+      "₹" + price;
+
+  document.getElementById("summaryQuantity")
+    .textContent =
+      quantity;
+
+  document.getElementById("summaryDelivery")
+    .textContent =
+      delivery === 0
+      ? "Free"
+      : "₹" + delivery;
+
+  document.getElementById("total")
+    .textContent =
+      "₹" + total;
+
+}
+
+
+/* =========================================
+   FORMAT SIZE
+========================================= */
+
+function formatSize(si
